@@ -1,0 +1,1 @@
+package com.smart.service;import com.smart.model.Dic;import com.smart.service.base.IBaseService;/** * Description: <dicservice>. <br> * <p> * <service接口层> * </p> * generate time:2014-9-17 16:49:49 *  * @version V1.0 */public interface IDicService extends IBaseService<Dic> {}

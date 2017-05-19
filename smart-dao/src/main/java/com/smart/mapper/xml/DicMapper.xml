@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.smart.mapper.DicMapper">
+
+
+	<resultMap id="dicResultMap" type="com.smart.model.Dic">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="dicValue" column="dic_value" />
+		<result property="remark" column="remark" />
+	</resultMap>
+
+
+	<insert id="save" parameterType="com.smart.model.Dic" useGeneratedKeys="true"
+		keyProperty="id">
+		insert into ts_dic(name,dic_value,remark) values
+		(#{name},#{dicValue},#{remark})
+	</insert>
+
+	<!-- 分页查询 -->
+	<select id="findPageList" parameterType="java.util.Map"
+		resultMap="dicResultMap">
+		select * from ts_dic
+		<where>
+			<if test="name != null">
+				 name like "%"#{name}"%"
+			</if>
+		</where>
+		
+		<if test="sortField != null and sortType != null">
+				 order by ${sortField}  ${sortType}
+		</if>
+		
+		limit #{start} ,#{pageSize}
+	</select>
+
+	<select id="count" parameterType="java.util.Map" resultType="Integer">
+		select count(*) from ts_dic
+		<where>
+			<if test="name != null">
+				 name like "%"#{name}"%"
+			</if>
+		</where>
+	</select>
+	
+	<update id="update" parameterType="com.smart.model.Dic">
+	  update ts_dic set
+	  name=#{name},
+	  dic_value=#{dicValue},
+	  remark=#{remark}
+	  where id= #{id}
+	</update>
+	
+	<select id="get" resultMap="dicResultMap" parameterType="Integer">
+	 	 select * from ts_dic where id=#{id}
+	</select>
+	
+	<select id="selectByName" resultMap="dicResultMap" parameterType="String">
+	 	 select * from ts_dic where name=#{name}
+	</select>
+	
+	
+	<delete id="delete" parameterType="Integer">
+		 delete from ts_dic where id=#{id}
+	</delete>
+    
+    <!-- 批量删除 -->
+    <delete id="deleteBatch">
+            delete from ts_dic where id in  
+	    <foreach collection="array" index="index" item="item" open="(" separator="," close=")">   
+	        #{item}   
+	    </foreach>  
+    </delete>  
+
+
+</mapper>
+
