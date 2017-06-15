@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smart.model.Dic;
+import com.smart.server.annotation.TokenValidation;
 import com.smart.server.util.BaseJsonResult;
 import com.smart.service.IDicService;
 
@@ -39,6 +40,7 @@ public class DicController {
 	@ApiOperation(value = "获取详细信息", notes = "根据id来获取详细信息")
 	@ApiImplicitParam(name = "id", value = "字典ID", required = true, dataType = "int", paramType = "path")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@TokenValidation
 	public BaseJsonResult<Dic> getDic(@PathVariable Integer id) throws Exception {
 		BaseJsonResult<Dic> baseJsonResult = new BaseJsonResult<>();
 		logger.info("getDic.......");

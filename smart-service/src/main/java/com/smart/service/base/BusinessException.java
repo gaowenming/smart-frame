@@ -15,18 +15,19 @@ public class BusinessException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	private String errorMsg;
 	private Integer errorCode;
+	private String errorMsg;
+
 
 	public BusinessException(String errorMsg) {
 		super();
 		this.errorMsg = errorMsg;
 	}
 
-	public BusinessException(String errorMsg, Integer errorCode) {
+	public BusinessException( Integer errorCode,String errorMsg) {
 		super();
-		this.errorMsg = errorMsg;
 		this.errorCode = errorCode;
+		this.errorMsg = errorMsg;
 	}
 
 	public BusinessException() {
