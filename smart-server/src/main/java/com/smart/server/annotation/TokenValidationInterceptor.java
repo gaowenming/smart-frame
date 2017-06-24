@@ -3,6 +3,8 @@ package com.smart.server.annotation;
 import com.smart.service.base.BusinessException;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -25,12 +27,30 @@ public class TokenValidationInterceptor {
 
     private final static Logger logger = LoggerFactory.getLogger(TokenValidationInterceptor.class);
 
-    @Pointcut("@annotation(com.smart.server.annotation.TokenValidation)")
+    //注解在类上面@within
+    @Pointcut("@within(com.smart.server.annotation.TokenValidation)")
     public void pointcut() {
     }
 
     @Before("pointcut()")
-    public void doTokenValidation(JoinPoint point) throws Throwable {
+    public void tokenValidationType(JoinPoint point) throws Throwable {
+        commonTokenValidation(point);
+    }
+
+
+    //注解在方法上面@annotation
+    @Pointcut("@annotation(com.smart.server.annotation.TokenValidation)")
+    public void pointcutMethod() {
+    }
+
+    @Before("pointcutMethod()")
+    public void tokenValidationMethod(JoinPoint point) throws Throwable {
+        commonTokenValidation(point);
+    }
+
+
+    //公共的校验
+    public static void commonTokenValidation(JoinPoint point) {
         HttpServletRequest request = null;
 
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
@@ -46,7 +66,6 @@ public class TokenValidationInterceptor {
 
         //校验token是否过期和正确
         //TODO
-
     }
 
 }

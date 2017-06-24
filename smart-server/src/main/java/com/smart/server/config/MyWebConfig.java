@@ -27,7 +27,7 @@ public class MyWebConfig extends WebMvcConfigurerAdapter {
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new TimeHandlerInterceptor());
 		// 针对需要校验的请求
-		registry.addInterceptor(new TokenHandlerInterceptor()).addPathPatterns("/api/xxxx", "/api/xxxxxxx");
+		//registry.addInterceptor(new TokenHandlerInterceptor()).addPathPatterns("/api/xxxx", "/api/xxxxxxx");
 	}
 
 }
