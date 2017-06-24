@@ -3,8 +3,6 @@ package com.smart.server.annotation;
 import com.smart.service.base.BusinessException;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -51,7 +49,7 @@ public class TokenValidationInterceptor {
 
     //公共的校验
     public static void commonTokenValidation(JoinPoint point) {
-        HttpServletRequest request = null;
+        HttpServletRequest request ;
 
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
