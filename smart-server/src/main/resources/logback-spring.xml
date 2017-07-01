@@ -1,37 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration debug="false">
-    <include resource="org/springframework/boot/logging/logback/base.xml" />
-    <logger name="org.springframework.web" level="INFO" />
-    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <property name="LOG_HOME" value="/opt/logs/dev" />
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%date %level [%thread] %logger{50}-[%line] %msg%n</pattern>
+            <pattern>%date %level %X{traceId} [%thread] %logger{50}-[%line] %msg%n</pattern>
         </encoder>
     </appender>
     <!-- 日志文件:按照每天生成 -->
     <appender name="FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/smart.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件地址和名称-->
-            <FileNamePattern>${LOG_HOME}/smart_log_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>${LOG_HOME}/smart_%d{yyyy-MM-dd}.log</FileNamePattern>
             <!--日志文件保留天数-->
             <MaxHistory>30</MaxHistory>
         </rollingPolicy>
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <pattern>%date %level [%thread] %logger{50}-[%line] %msg%n</pattern>
+            <pattern>%date %level %X{traceId} [%thread] %logger{50}-[%line] %msg%n</pattern>
         </encoder>
         <!--日志文件最大的大小-->
         <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <MaxFileSize>10MB</MaxFileSize>
+            <MaxFileSize>100MB</MaxFileSize>
         </triggeringPolicy>
+    </appender>
+
+    <!-- error日志 -->
+    <appender name="ERROR"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/smart_error.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件地址和名称-->
+            <FileNamePattern>${LOG_HOME}/smart_error_%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date %level %X{traceId} [%thread] %logger{50}-[%line] %msg%n</pattern>
+        </encoder>
+
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level><!-- 只接收错误级别的日志 -->
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
     </appender>
 
     <!-- 日志输出级别 -->
     <root level="INFO">
-        <!-- 日志输出地点,输出一个就行
-        <appender-ref ref="STDOUT"/> -->
+        <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE" />
+        <appender-ref ref="ERROR" />
     </root>
 </configuration>

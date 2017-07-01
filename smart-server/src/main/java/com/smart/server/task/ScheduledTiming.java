@@ -20,8 +20,8 @@ public class ScheduledTiming {
 
 	private final static Logger logger = LoggerFactory.getLogger(ScheduledTiming.class);
 
-	@Scheduled(fixedRate = 60000)
-	@ScheduleTaskLock
+	//@Scheduled(fixedRate = 60000)
+	//@ScheduleTaskLock
 	public void myTask() throws Exception {
 		logger.info("...........定时任务开始执行........");
 	}

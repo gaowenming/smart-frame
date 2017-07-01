@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.smart.server.interceptor.MdcLoggerInterceptor;
 import com.smart.server.interceptor.TimeHandlerInterceptor;
 import com.smart.server.interceptor.TokenHandlerInterceptor;
 
@@ -26,6 +27,7 @@ public class MyWebConfig extends WebMvcConfigurerAdapter {
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new TimeHandlerInterceptor());
+		registry.addInterceptor(new MdcLoggerInterceptor());
 		// 针对需要校验的请求
 		//registry.addInterceptor(new TokenHandlerInterceptor()).addPathPatterns("/api/xxxx", "/api/xxxxxxx");
 	}
