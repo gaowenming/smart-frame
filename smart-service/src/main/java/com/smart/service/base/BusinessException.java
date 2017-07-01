@@ -2,61 +2,65 @@ package com.smart.service.base;
 
 /**
  * 业务异常类
- * 
+ *
  * ClassName:BusinessException <br/>
  * Date: 2017年5月13日 上午11:13:05 <br/>
- * 
+ *
  * @author gaowenming
- * @version
- * @since JDK 1.6
  * @see
+ * @since JDK 1.6
  */
 public class BusinessException extends RuntimeException {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Integer errorCode;
-	private String errorMsg;
+    private Integer errorCode;
+    private String errorMsg;
 
+    public BusinessException(Integer errorCode, String errorMsg) {
+        super(errorMsg);
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
 
-	public BusinessException(String errorMsg) {
-		super();
-		this.errorMsg = errorMsg;
-	}
+    public BusinessException() {
+        super();
+    }
 
-	public BusinessException( Integer errorCode,String errorMsg) {
-		super();
-		this.errorCode = errorCode;
-		this.errorMsg = errorMsg;
-	}
+    public BusinessException(Integer errorCode, String errorMsg, Throwable cause) {
+        this.errorMsg = errorMsg;
+        this.errorCode = errorCode;
+    }
 
-	public BusinessException() {
-		super();
-	}
+    public BusinessException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
-	public BusinessException(Integer errorCode, String errorMsg, Throwable cause) {
-		this.errorMsg = errorMsg;
-		this.errorCode = errorCode;
-	}
+    public String getErrorMsg() {
+        return errorMsg;
+    }
 
-	public BusinessException(String message, Throwable cause) {
-		super(message, cause);
-	}
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
 
-	public String getErrorMsg() {
-		return errorMsg;
-	}
+    public Integer getErrorCode() {
+        return errorCode;
+    }
 
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
+    public void setErrorCode(Integer errorCode) {
+        this.errorCode = errorCode;
+    }
 
-	public Integer getErrorCode() {
-		return errorCode;
-	}
+    public BusinessException(String message) {
+        super(message);
+    }
 
-	public void setErrorCode(Integer errorCode) {
-		this.errorCode = errorCode;
-	}
+    protected BusinessException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 
+    public BusinessException(Throwable cause) {
+        super(cause);
+    }
 }

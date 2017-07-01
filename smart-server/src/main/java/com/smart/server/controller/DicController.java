@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("api/dic/")
 @Api(value = "api/dic/", description = "数据字典")
-//@TokenValidation
+@TokenValidation
 public class DicController {
 
 	private final static Logger logger = LoggerFactory.getLogger(DicController.class);
