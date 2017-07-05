@@ -1,21 +1,21 @@
 package com.smart.server.lock;
 
-import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
+import com.smart.server.util.RedisService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.smart.server.util.RedisService;
+import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * redis锁注解拦截器
@@ -28,9 +28,8 @@ import com.smart.server.util.RedisService;
  */
 @Aspect
 @Component
+@Slf4j
 public class RedisLockInterceptor {
-
-	private final static Logger logger = LoggerFactory.getLogger(RedisLockInterceptor.class);
 
 	@Autowired
 	private RedisService redisService;
@@ -52,11 +51,11 @@ public class RedisLockInterceptor {
 		RedisLockable redisLock = targetMethod.getAnnotation(RedisLockable.class);
 		long expire = redisLock.expiration();
 		String redisKey = getLockKey(redisLock, targetMethod, targetName, methodName, target, arguments);
-		logger.info("<------------------redisKey = " + redisKey + " ---------------->");
+		log.info("<------------------redisKey = " + redisKey + " ---------------->");
 		boolean isLock;
 
 		isLock = waitingLock(redisKey, expire, redisLock.retryCount());
-		logger.info("<------------------获取等待锁---------------->isLock=" + isLock);
+		log.info("<------------------获取等待锁---------------->isLock=" + isLock);
 
 		if (isLock) {
 			long startTime = System.currentTimeMillis();
@@ -69,7 +68,7 @@ public class RedisLockInterceptor {
 				}
 			}
 		} else {
-			logger.info("获取锁超时，请稍后再试");
+			log.info("获取锁超时，请稍后再试");
 			return null;
 		}
 	}

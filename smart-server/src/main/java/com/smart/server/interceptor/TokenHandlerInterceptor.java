@@ -1,15 +1,15 @@
 package com.smart.server.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.smart.service.base.BusinessException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.smart.service.base.BusinessException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -21,9 +21,8 @@ import com.smart.service.base.BusinessException;
  * @version
  * @since JDK 1.8
  */
+@Slf4j
 public class TokenHandlerInterceptor implements HandlerInterceptor {
-
-	private final static Logger logger = LoggerFactory.getLogger(HandlerInterceptor.class);
 
 	/**
 	 * token放在header中
@@ -33,7 +32,7 @@ public class TokenHandlerInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String url = request.getServletPath();
 		String token = request.getHeader("token");
-		logger.info("TokenHandlerInterceptor----- " + url + ", token=" + token);
+		log.info("TokenHandlerInterceptor----- " + url + ", token=" + token);
 		if (StringUtils.isEmpty(token)) {
 			throw new BusinessException("Token is Null");
 		}

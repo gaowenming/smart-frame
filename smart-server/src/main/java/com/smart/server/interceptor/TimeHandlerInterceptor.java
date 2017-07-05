@@ -1,15 +1,15 @@
 package com.smart.server.interceptor;
 
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+
 import java.lang.reflect.Method;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 
@@ -21,9 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @version
  * @since JDK 1.8
  */
+@Slf4j
 public class TimeHandlerInterceptor implements HandlerInterceptor {
-
-	private final static Logger logger = LoggerFactory.getLogger(HandlerInterceptor.class);
 
 	// 当前时间戳
 	private ThreadLocal<Long> threadLocalTime = new ThreadLocal<Long>();
@@ -48,7 +47,7 @@ public class TimeHandlerInterceptor implements HandlerInterceptor {
 		long endTime = System.currentTimeMillis();
 		long startTime = threadLocalTime.get();
 		long executeTime = endTime - startTime;
-		logger.info("[" + method.getDeclaringClass().getName() + "." + method.getName() + "] 执行耗时 : " + executeTime + "ms");
+		log.info("[" + method.getDeclaringClass().getName() + "." + method.getName() + "] 执行耗时 : " + executeTime + "ms");
 	}
 
 	/**

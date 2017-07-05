@@ -1,12 +1,5 @@
 package com.smart.server.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
@@ -15,6 +8,13 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * redis操作工具类
  * 
@@ -22,9 +22,8 @@ import org.springframework.util.StringUtils;
  *
  */
 @Service
+@Slf4j
 public class RedisService {
-	private Logger logger = LoggerFactory.getLogger(RedisService.class);
-
 	@Autowired
 	private RedisTemplate<String, Object> redisTemplate;
 
@@ -48,7 +47,7 @@ public class RedisService {
 		try {
 			redisTemplate.opsForValue().set(key, value, expireTime, TimeUnit.SECONDS);
 		} catch (Exception e) {
-			logger.error(String.format("redis set operation for value failed by key [%s]: %s", key, e.getMessage()));
+			log.error(String.format("redis set operation for value failed by key [%s]: %s", key, e.getMessage()));
 		}
 
 		return true;
@@ -68,7 +67,7 @@ public class RedisService {
 		try {
 			redisTemplate.opsForValue().set(key, value);
 		} catch (Exception e) {
-			logger.error(String.format("redis set operation for value failed by key [%s]: %s", key, e.getMessage()));
+			log.error(String.format("redis set operation for value failed by key [%s]: %s", key, e.getMessage()));
 		}
 
 		return true;
@@ -89,7 +88,7 @@ public class RedisService {
 		try {
 			object = redisTemplate.opsForValue().get(key);
 		} catch (Exception e) {
-			logger.error(String.format("redis get operation for value failed by key [%s]: %s", key, e.getMessage()));
+			log.error(String.format("redis get operation for value failed by key [%s]: %s", key, e.getMessage()));
 			return object;
 		}
 		return object;
@@ -110,7 +109,7 @@ public class RedisService {
 		try {
 			object = redisTemplate.opsForValue().get(key);
 		} catch (Exception e) {
-			logger.error(String.format("redis get operation for value failed by key [%s]: %s", key, e.getMessage()));
+			log.error(String.format("redis get operation for value failed by key [%s]: %s", key, e.getMessage()));
 			return "";
 		}
 		if (object != null) {
@@ -138,7 +137,7 @@ public class RedisService {
 				map = (Map<String, Object>) object;
 			}
 		} catch (Exception e) {
-			logger.error(String.format("redis get operation for value failed by key [%s]: %s", key, e.getMessage()));
+			log.error(String.format("redis get operation for value failed by key [%s]: %s", key, e.getMessage()));
 			return map;
 		}
 		return map;
@@ -159,7 +158,7 @@ public class RedisService {
 			redisTemplate.delete(key);
 			b = true;
 		} catch (Exception e) {
-			logger.error(String.format("redis removeKey for key failed by key [%s]: %s", key, e.getMessage()));
+			log.error(String.format("redis removeKey for key failed by key [%s]: %s", key, e.getMessage()));
 		}
 
 		return b;
@@ -219,7 +218,7 @@ public class RedisService {
 			redisTemplate.delete(keys);
 			b = true;
 		} catch (Exception e) {
-			logger.error(String.format("redis removeKey for key failed by key [%s]: %s", keys, e.getMessage()));
+			log.error(String.format("redis removeKey for key failed by key [%s]: %s", keys, e.getMessage()));
 		}
 
 		return b;
@@ -271,7 +270,7 @@ public class RedisService {
 		try {
 			redisTemplate.expire(key, seconds, TimeUnit.SECONDS);
 		} catch (Exception ex) {
-			logger.error("EXPIRE error[key=" + key + " seconds=" + seconds + "]" + ex.getMessage(), ex);
+			log.error("EXPIRE error[key=" + key + " seconds=" + seconds + "]" + ex.getMessage(), ex);
 		}
 		return 0;
 	}
@@ -283,7 +282,6 @@ public class RedisService {
 	 * @Description:
 	 * @param key
 	 * @param value
-	 * @param clazz
 	 * @return
 	 * 
 	 */

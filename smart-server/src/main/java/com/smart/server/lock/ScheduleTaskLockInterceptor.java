@@ -1,20 +1,20 @@
 package com.smart.server.lock;
 
-import java.lang.reflect.Method;
+import com.smart.server.util.RedisService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.smart.server.util.RedisService;
+import java.lang.reflect.Method;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * redis锁注解拦截器
@@ -27,9 +27,8 @@ import com.smart.server.util.RedisService;
  */
 @Aspect
 @Component
+@Slf4j
 public class ScheduleTaskLockInterceptor {
-
-	private final static Logger logger = LoggerFactory.getLogger(ScheduleTaskLockInterceptor.class);
 
 	@Autowired
 	private RedisService redisService;
@@ -49,11 +48,11 @@ public class ScheduleTaskLockInterceptor {
 		ScheduleTaskLock scheduleTaskLock = targetMethod.getAnnotation(ScheduleTaskLock.class);
 		long expire = scheduleTaskLock.expiration();
 		String redisKey = getLockKey(scheduleTaskLock, targetMethod, targetName, methodName);
-		logger.info("<------------------redisKey = " + redisKey + " ---------------->");
+		log.info("<------------------redisKey = " + redisKey + " ---------------->");
 		boolean isLock;
 
 		isLock = noWaitingLock(redisKey, expire);
-		logger.info("<-------------------获取非等待锁---------------->isLock=" + isLock);
+		log.info("<-------------------获取非等待锁---------------->isLock=" + isLock);
 		if (isLock) {
 			long startTime = System.currentTimeMillis();
 			try {
@@ -65,7 +64,7 @@ public class ScheduleTaskLockInterceptor {
 				}
 			}
 		} else {
-			logger.info("获取锁超时，请稍后再试");
+			log.info("获取锁超时，请稍后再试");
 			return null;
 		}
 	}

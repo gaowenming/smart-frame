@@ -1,12 +1,11 @@
 package com.smart.server.config;
 
+import com.smart.server.interceptor.MdcLoggerInterceptor;
+import com.smart.server.interceptor.TimeHandlerInterceptor;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
-import com.smart.server.interceptor.MdcLoggerInterceptor;
-import com.smart.server.interceptor.TimeHandlerInterceptor;
-import com.smart.server.interceptor.TokenHandlerInterceptor;
 
 /**
  * 
