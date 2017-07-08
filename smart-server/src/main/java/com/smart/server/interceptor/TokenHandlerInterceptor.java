@@ -17,9 +17,8 @@ import lombok.extern.slf4j.Slf4j;
  * Function: token拦截器. <br/>
  * date: 2017年3月23日 下午8:46:58 <br/>
  *
- * @author gaowenming
- * @version
- * @since JDK 1.8
+ * author gaowenming
+ * since JDK 1.8
  */
 @Slf4j
 public class TokenHandlerInterceptor implements HandlerInterceptor {

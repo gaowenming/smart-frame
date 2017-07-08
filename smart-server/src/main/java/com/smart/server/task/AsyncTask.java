@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 import java.util.Random;
 import java.util.concurrent.Future;
 
+import lombok.extern.slf4j.Slf4j;
+
+
 /**
  * 基于Async注解的异步任务，需要开启@EnableAsync
  * Author: gaowenming
@@ -14,8 +17,9 @@ import java.util.concurrent.Future;
  * Date: Created in 20:49 2017/7/2.
  */
 @Component
+@Slf4j
 public class AsyncTask {
-    public static Random random = new Random();
+    private static Random random = new Random();
 
     @Async
     public Future<String> task1() throws Exception {
@@ -49,16 +53,18 @@ public class AsyncTask {
 
     @Async("smartExecutor")
     public void taskAsync1() throws Exception {
-        for (int i = 0; i < 1000; i++) {
-            System.out.println("##########################" + i);
+        Thread.sleep(1000);
+        for (int i = 0; i < 10; i++) {
+            log.info("##########################" + i);
         }
 
     }
 
     @Async("smartExecutor")
     public void taskAsync2() throws Exception {
-        for (int i = 0; i < 1000; i++) {
-            System.out.println("************************" + i);
+        Thread.sleep(1000);
+        for (int i = 0; i < 10; i++) {
+            log.info("************************" + i);
         }
     }
 }

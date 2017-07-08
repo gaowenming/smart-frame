@@ -2,12 +2,16 @@ package com.smart.server.util;
 
 import java.io.Serializable;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @author gaowenming
  */
-@Data
+@Getter
+@Setter
+@ToString
 public class BaseJsonResult<T> implements Serializable {
 
     private static final long serialVersionUID = -6987458106094362943L;

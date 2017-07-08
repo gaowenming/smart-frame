@@ -16,9 +16,9 @@ import lombok.extern.slf4j.Slf4j;
  * 全局异常处理 ClassName: GlobalExceptionHandler <br/>
  * date: 2017年4月28日 下午10:14:26 <br/>
  *
- * @author gaowenming
- * @version
- * @since JDK 1.8
+ * author gaowenming
+ * version
+ * since JDK 1.8
  */
 @RestControllerAdvice
 @Slf4j
@@ -30,9 +30,9 @@ public class GlobalExceptionHandler {
 	 * @author gaowenming
 	 * @param req
 	 * @param e
-	 * @return
-	 * @throws Exception
-	 * @since JDK 1.8
+	 * return
+	 * throws Exception
+	 * since JDK 1.8
 	 */
 	@ExceptionHandler(value = Exception.class)
 	@ResponseBody
@@ -50,9 +50,9 @@ public class GlobalExceptionHandler {
 	 * @author gaowenming
 	 * @param req
 	 * @param e
-	 * @return
-	 * @throws Exception
-	 * @since JDK 1.8
+	 * return
+	 * throws Exception
+	 * since JDK 1.8
 	 */
 	@ExceptionHandler(value = BusinessException.class)
 	@ResponseBody

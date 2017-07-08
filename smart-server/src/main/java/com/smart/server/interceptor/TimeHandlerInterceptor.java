@@ -17,15 +17,14 @@ import lombok.extern.slf4j.Slf4j;
  * Function: 方法执行时间拦截器. <br/>
  * date: 2017年3月23日 下午8:46:58 <br/>
  *
- * @author gaowenming
- * @version
- * @since JDK 1.8
+ * author gaowenming
+ * since JDK 1.8
  */
 @Slf4j
 public class TimeHandlerInterceptor implements HandlerInterceptor {
 
 	// 当前时间戳
-	private ThreadLocal<Long> threadLocalTime = new ThreadLocal<Long>();
+	private ThreadLocal<Long> threadLocalTime = new ThreadLocal<>();
 
 	/**
 	 * controller 执行之前调用
