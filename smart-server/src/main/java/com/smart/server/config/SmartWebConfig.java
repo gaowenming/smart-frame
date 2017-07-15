@@ -9,16 +9,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 /**
  * 
- * ClassName: MyWebConfig <br/>
+ * ClassName: SmartWebConfig <br/>
  * Function: 拦截器. <br/>
  * date: 2017年3月23日 下午8:57:44 <br/>
  *
  * @author gaowenming
- * @version
  * @since JDK 1.8
  */
 @Configuration
-public class MyWebConfig extends WebMvcConfigurerAdapter {
+public class SmartWebConfig extends WebMvcConfigurerAdapter {
 
 	/**
 	 * 注册 拦截器

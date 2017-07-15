@@ -1,6 +1,7 @@
 package com.test;
 
 import com.smart.server.Application;
+import com.smart.server.config.SmartConfigProperties;
 import com.smart.server.mail.SmartMailSender;
 import com.smart.server.task.AsyncTask;
 import com.smart.service.IDicService;
@@ -8,6 +9,7 @@ import com.smart.service.IDicService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -25,6 +27,9 @@ public class ApplicationTests {
 
     @Autowired
     private AsyncTask asyncTask;
+
+    @Autowired
+    private  SmartConfigProperties smartConfigProperties;
 
     @Test
     public void getDic() throws Exception {
@@ -45,6 +50,9 @@ public class ApplicationTests {
         while (true) {
             if (task1.isDone() && task2.isDone() && task3.isDone()) {
                 // 三个任务都调用完成，退出循环等待
+                System.out.println(task1.get());
+                System.out.println(task2.get());
+                System.out.println(task3.get());
                 break;
             }
         }
@@ -58,6 +66,12 @@ public class ApplicationTests {
         asyncTask.taskAsync1();
         asyncTask.taskAsync2();
         System.out.println("end.....");
+    }
+
+    @Test
+    public void testConfig(){
+        System.out.println(smartConfigProperties.getUsername());
+        System.out.println(smartConfigProperties.getSecretKey());
     }
 
 

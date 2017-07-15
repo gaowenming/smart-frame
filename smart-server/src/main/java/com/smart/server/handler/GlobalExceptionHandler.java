@@ -28,8 +28,8 @@ public class GlobalExceptionHandler {
 	 * 业务异常
 	 *
 	 * @author gaowenming
-	 * @param req
-	 * @param e
+	 * param req
+	 * param e
 	 * return
 	 * throws Exception
 	 * since JDK 1.8
@@ -48,8 +48,8 @@ public class GlobalExceptionHandler {
 	 * 业务异常
 	 *
 	 * @author gaowenming
-	 * @param req
-	 * @param e
+	 * param req
+	 * param e
 	 * return
 	 * throws Exception
 	 * since JDK 1.8

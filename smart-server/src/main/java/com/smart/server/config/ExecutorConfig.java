@@ -17,15 +17,15 @@ public class ExecutorConfig {
     /**
      * Set the ThreadPoolExecutor's core pool size.
      */
-    private int corePoolSize = 10;
+    private static final int corePoolSize = 10;
     /**
      * Set the ThreadPoolExecutor's maximum pool size.
      */
-    private int maxPoolSize = 200;
+    private static final int maxPoolSize = 200;
     /**
      * Set the capacity for the ThreadPoolExecutor's BlockingQueue.
      */
-    private int queueCapacity = 10;
+    private static final int queueCapacity = 10;
 
     @Bean
     public Executor smartExecutor() {

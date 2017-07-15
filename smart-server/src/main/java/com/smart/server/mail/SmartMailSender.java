@@ -26,7 +26,7 @@ public class SmartMailSender {
      * @param toUser  收件人
      * @param subject 主题
      * @param content 内容
-     * @Async 异步调用
+     * Async 异步调用
      */
     public void sendSimpleMail(String toUser, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
