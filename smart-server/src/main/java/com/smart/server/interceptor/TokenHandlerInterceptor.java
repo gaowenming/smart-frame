@@ -31,7 +31,7 @@ public class TokenHandlerInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String url = request.getServletPath();
 		String token = request.getHeader("token");
-		log.info("TokenHandlerInterceptor----- " + url + ", token=" + token);
+		log.info("TokenHandlerInterceptor----- url:{},token:{}  ",url, token);
 		if (StringUtils.isEmpty(token)) {
 			throw new BusinessException("Token is Null");
 		}

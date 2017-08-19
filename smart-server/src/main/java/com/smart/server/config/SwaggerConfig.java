@@ -1,5 +1,6 @@
 package com.smart.server.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -19,17 +20,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-	/**
-	 * 可以定义多个组，比如本类中定义把test和demo区分开了 （访问页面就可以看到效果了）
-	 *
-	 */
-	@Bean
-	public Docket testApi() {
-		return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("com.smart.server")).paths(PathSelectors.any()).build();
-	}
+    @Value("${swagger.enable}")
+    private boolean swaggerEnable ;
 
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("Spring Boot中使用Swagger2构建RESTful APIs").description("接口描述").termsOfServiceUrl("http://blog.didispace.com/")
-				.contact(new Contact("admin", "http://www.baidu.com", "gaowm0207@163.com")).version("1.0").build();
-	}
+    @Bean
+    public Docket smartApi() {
+        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().apis(RequestHandlerSelectors.basePackage("com.smart.server")).paths(PathSelectors.any()).build().enable(swaggerEnable);
+    }
+
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder().title("RESTful APIs").description("接口描述").contact(new Contact("admin", "", "gaowm0207@163.com")).version("1.0").build();
+    }
+
 }

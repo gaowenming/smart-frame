@@ -48,11 +48,11 @@ public class ScheduleTaskLockInterceptor {
 		ScheduleTaskLock scheduleTaskLock = targetMethod.getAnnotation(ScheduleTaskLock.class);
 		long expire = scheduleTaskLock.expiration();
 		String redisKey = getLockKey(scheduleTaskLock, targetMethod, targetName, methodName);
-		log.info("<------------------redisKey = " + redisKey + " ---------------->");
+		log.info("<------------------redisKey = {} ---------------->",redisKey);
 		boolean isLock;
 
 		isLock = noWaitingLock(redisKey, expire);
-		log.info("<-------------------获取非等待锁---------------->isLock=" + isLock);
+		log.info("<-------------------获取非等待锁---------------->isLock={}" , isLock);
 		if (isLock) {
 			long startTime = System.currentTimeMillis();
 			try {

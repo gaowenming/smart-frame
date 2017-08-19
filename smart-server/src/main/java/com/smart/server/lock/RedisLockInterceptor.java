@@ -51,11 +51,11 @@ public class RedisLockInterceptor {
 		RedisLockable redisLock = targetMethod.getAnnotation(RedisLockable.class);
 		long expire = redisLock.expiration();
 		String redisKey = getLockKey(redisLock, targetMethod, targetName, methodName, target, arguments);
-		log.info("<------------------redisKey = " + redisKey + " ---------------->");
+		log.info("<------------------redisKey:{} ---------------->",redisKey);
 		boolean isLock;
 
 		isLock = waitingLock(redisKey, expire, redisLock.retryCount());
-		log.info("<------------------获取等待锁---------------->isLock=" + isLock);
+		log.info("<------------------获取等待锁---------------->isLock={}" , isLock);
 
 		if (isLock) {
 			long startTime = System.currentTimeMillis();

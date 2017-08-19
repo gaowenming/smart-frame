@@ -4,15 +4,17 @@ import com.smart.server.Application;
 import com.smart.server.config.SmartConfigProperties;
 import com.smart.server.mail.SmartMailSender;
 import com.smart.server.task.AsyncTask;
+import com.smart.server.util.RedisService;
 import com.smart.service.IDicService;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.Future;
 
 @RunWith(SpringRunner.class)
@@ -30,6 +32,9 @@ public class ApplicationTests {
 
     @Autowired
     private  SmartConfigProperties smartConfigProperties;
+
+    @Autowired
+    private RedisService redisService;
 
     @Test
     public void getDic() throws Exception {
@@ -72,6 +77,20 @@ public class ApplicationTests {
     public void testConfig(){
         System.out.println(smartConfigProperties.getUsername());
         System.out.println(smartConfigProperties.getSecretKey());
+    }
+
+    @Test
+    public void testRedis() throws Exception{
+        String str ="312357126537：23823231232138";
+        for (int i = 0; i <1000000 ; i++) {
+            Thread.sleep(1);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    redisService.addCache(new Random().nextLong()+"",str,6000);
+                }
+            }).start();
+        }
     }
 
 

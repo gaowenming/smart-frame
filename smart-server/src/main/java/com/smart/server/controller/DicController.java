@@ -16,42 +16,34 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * ClassName:DicController <br/>
- * Function: TODO ADD FUNCTION. <br/>
- * Date: 2017年3月22日 上午10:43:59 <br/>
- * 
- * @author gaowenming
- * version
- * @since JDK 1.6
- */
-	@RestController
-	@RequestMapping("api/dic/")
-	@Api
-	@Slf4j
-	public class DicController {
 
-	@Autowired
-	private IDicService dicService;
+@RestController
+@RequestMapping("api/dic/")
+@Api
+@Slf4j
+public class DicController {
 
-	@ApiOperation("获取详细信息")
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public BaseJsonResult<Dic> getDic(@PathVariable Integer id) throws Exception {
-		BaseJsonResult<Dic> baseJsonResult = new BaseJsonResult<>();
-		log.info("getDic.......");
-		Dic dic = dicService.get(id);
-		baseJsonResult.setData(dic);
-		return baseJsonResult;
+    @Autowired
+    private IDicService dicService;
 
-	}
+    @ApiOperation("获取详细信息")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public BaseJsonResult<Dic> getDic(@PathVariable Integer id) throws Exception {
+        BaseJsonResult<Dic> baseJsonResult = new BaseJsonResult<>();
+        log.info("getDic.......");
+        Dic dic = dicService.get(id);
+        baseJsonResult.setData(dic);
+        return baseJsonResult;
 
-	@ApiOperation("新增字典信息")
-	@RequestMapping(value = "/addDic", method = RequestMethod.POST)
-	@TokenValidation
-	public BaseJsonResult<Object> postDic(@RequestBody Dic dic) throws Exception {
-		BaseJsonResult<Object> baseJsonResult = new BaseJsonResult<>();
-		log.info("addDic.......");
-		dicService.save(dic);
-		return baseJsonResult;
-	}
+    }
+
+    @ApiOperation("新增字典信息")
+    @RequestMapping(value = "/addDic", method = RequestMethod.POST)
+    @TokenValidation
+    public BaseJsonResult<Object> postDic(@RequestBody Dic dic) throws Exception {
+        BaseJsonResult<Object> baseJsonResult = new BaseJsonResult<>();
+        log.info("addDic.......");
+        dicService.save(dic);
+        return baseJsonResult;
+    }
 }

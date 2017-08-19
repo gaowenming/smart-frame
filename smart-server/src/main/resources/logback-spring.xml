@@ -3,6 +3,13 @@
 <configuration debug="false">
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
     <property name="LOG_HOME" value="/opt/logs/dev" />
+    <!--设置框架的日志-->
+    <logger name="org.springframework" level="WARN" />
+    <logger name="org.apache.zookeeper" level="INFO" />
+    <logger name="com.alibaba.dubbo" level="INFO" />
+    <!--mybatis日志-->
+    <logger name="dao" level="DEBUG"/>
+
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">

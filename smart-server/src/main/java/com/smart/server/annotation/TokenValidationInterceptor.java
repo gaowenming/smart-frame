@@ -56,7 +56,7 @@ public class TokenValidationInterceptor {
 
         String url = request.getServletPath();
         String token = request.getHeader("token");
-        log.info("TokenHandlerInterceptor----- " + url + ", token=" + token);
+        log.info("TokenHandlerInterceptor----- url:{},token:{}  ",url, token);
         if (StringUtils.isEmpty(token)) {
             throw new BusinessException(0, "Token is Null");
         }

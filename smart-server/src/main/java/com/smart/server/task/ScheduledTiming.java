@@ -1,5 +1,8 @@
 package com.smart.server.task;
 
+import com.smart.server.lock.ScheduleTaskLock;
+
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ScheduledTiming {
 
-	//@Scheduled(fixedRate = 60000)
-	//@ScheduleTaskLock
+	@Scheduled(fixedRate = 600000)
+	@ScheduleTaskLock
 	public void myTask() throws Exception {
 		log.info("...........定时任务开始执行........");
 	}
