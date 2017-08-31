@@ -8,10 +8,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * 
- * ClassName: SmartWebConfig <br/>
- * Function: 拦截器. <br/>
- * date: 2017年3月23日 下午8:57:44 <br/>
+ * ClassName: SmartWebConfig <br/> Function: 拦截器. <br/> date: 2017年3月23日 下午8:57:44 <br/>
  *
  * @author gaowenming
  * @since JDK 1.8
@@ -19,15 +16,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 public class SmartWebConfig extends WebMvcConfigurerAdapter {
 
-	/**
-	 * 注册 拦截器
-	 */
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(new TimeHandlerInterceptor());
-		registry.addInterceptor(new MdcLoggerInterceptor());
-		// 针对需要校验的请求
-		//registry.addInterceptor(new TokenHandlerInterceptor()).addPathPatterns("/api/xxxx", "/api/xxxxxxx");
-	}
+    /**
+     * 注册 拦截器
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new TimeHandlerInterceptor());
+        registry.addInterceptor(new MdcLoggerInterceptor());
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.smart.server.annotation;
 
+import com.smart.service.base.BusinessErrorMsg;
 import com.smart.service.base.BusinessException;
 
 import org.aspectj.lang.JoinPoint;
@@ -58,7 +59,7 @@ public class TokenValidationInterceptor {
         String token = request.getHeader("token");
         log.info("TokenHandlerInterceptor----- url:{},token:{}  ",url, token);
         if (StringUtils.isEmpty(token)) {
-            throw new BusinessException(0, "Token is Null");
+            throw new BusinessException(BusinessErrorMsg.VALIDATION_TOKEN_NULL);
         }
 
         //校验token是否过期和正确
