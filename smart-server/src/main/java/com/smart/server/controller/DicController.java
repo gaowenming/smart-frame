@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -26,7 +25,6 @@ public class DicController {
     @Autowired
     private IDicService dicService;
 
-    @ApiOperation("获取详细信息")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public BaseJsonResult<Dic> getDic(@PathVariable Integer id) throws Exception {
         BaseJsonResult<Dic> baseJsonResult = new BaseJsonResult<>();
@@ -37,13 +35,19 @@ public class DicController {
 
     }
 
-    @ApiOperation("新增字典信息")
     @RequestMapping(value = "/addDic", method = RequestMethod.POST)
     @TokenValidation
-    public BaseJsonResult<Object> postDic(@RequestBody Dic dic) throws Exception {
+    public BaseJsonResult<Object> addtDic(@RequestBody Dic dic) throws Exception {
         BaseJsonResult<Object> baseJsonResult = new BaseJsonResult<>();
         log.info("addDic.......");
         dicService.save(dic);
+        return baseJsonResult;
+    }
+
+    @RequestMapping(value = "/updateDic", method = RequestMethod.POST)
+    @TokenValidation
+    public BaseJsonResult<Object> updateDic(Integer id) throws Exception {
+        BaseJsonResult<Object> baseJsonResult = new BaseJsonResult<>();
         return baseJsonResult;
     }
 }

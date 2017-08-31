@@ -66,12 +66,13 @@ public class GlobalExceptionHandler {
     private static void printMethodParameters(HttpServletRequest request) {
         StringBuilder methodInfo = new StringBuilder();
         methodInfo.append("url=").append(request.getServletPath());
+        methodInfo.append(" ;params= ");
         if (request.getQueryString() != null) {
             methodInfo.append(request.getQueryString()).append(" - ");
         } else {
             Map<String, String[]> parameters = request.getParameterMap();
             if (parameters.size() != 0) {
-                methodInfo.append(" - [");
+                methodInfo.append(" [");
             }
             for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
                 String key = entry.getKey();

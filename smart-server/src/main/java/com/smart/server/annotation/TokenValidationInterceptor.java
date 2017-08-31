@@ -1,5 +1,6 @@
 package com.smart.server.annotation;
 
+import com.smart.server.util.Constants;
 import com.smart.service.base.BusinessErrorMsg;
 import com.smart.service.base.BusinessException;
 
@@ -48,16 +49,16 @@ public class TokenValidationInterceptor {
 
 
     //公共的校验
-    public static void commonTokenValidation(JoinPoint point) {
-        HttpServletRequest request ;
+    public static void commonTokenValidation(JoinPoint point) throws Throwable {
+        HttpServletRequest request;
 
         RequestAttributes ra = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) ra;
         request = sra.getRequest();
 
         String url = request.getServletPath();
-        String token = request.getHeader("token");
-        log.info("TokenHandlerInterceptor----- url:{},token:{}  ",url, token);
+        String token = request.getHeader(Constants.TOKEN_NAME);
+        log.info("TokenHandlerInterceptor----- url:{},token:{}  ", url, token);
         if (StringUtils.isEmpty(token)) {
             throw new BusinessException(BusinessErrorMsg.VALIDATION_TOKEN_NULL);
         }
