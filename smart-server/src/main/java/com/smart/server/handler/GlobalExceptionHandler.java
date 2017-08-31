@@ -63,8 +63,8 @@ public class GlobalExceptionHandler {
     /**
      * 记录方法的入参
      */
-    public void printMethodParameters(HttpServletRequest request) {
-        StringBuffer methodInfo = new StringBuffer();
+    private static void printMethodParameters(HttpServletRequest request) {
+        StringBuilder methodInfo = new StringBuilder();
         methodInfo.append("url=").append(request.getServletPath());
         if (request.getQueryString() != null) {
             methodInfo.append(request.getQueryString()).append(" - ");

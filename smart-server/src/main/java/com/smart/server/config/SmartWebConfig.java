@@ -1,6 +1,5 @@
 package com.smart.server.config;
 
-import com.smart.server.interceptor.MdcLoggerInterceptor;
 import com.smart.server.interceptor.TimeHandlerInterceptor;
 
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +21,6 @@ public class SmartWebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new TimeHandlerInterceptor());
-        registry.addInterceptor(new MdcLoggerInterceptor());
     }
 
 }

@@ -1,10 +1,12 @@
 package com.smart.server.interceptor;
 
+import org.slf4j.MDC;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.lang.reflect.Method;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +30,8 @@ public class TimeHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        //日志追加traceId追踪
+        MDC.put("traceId", "traceId=" + UUID.randomUUID().toString().replace("-", ""));
         long startTime = System.currentTimeMillis();
         threadLocalTime.set(startTime);
         return true;
@@ -51,7 +55,7 @@ public class TimeHandlerInterceptor implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
+        MDC.clear();
     }
 
 }
