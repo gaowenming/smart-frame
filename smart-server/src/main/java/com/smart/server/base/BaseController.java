@@ -24,7 +24,7 @@ public class BaseController {
      *
      * 只返回状态和消息，内容为空
      */
-    protected BaseJsonResult successResult() throws Exception {
+    protected BaseJsonResult successNullDataResult() throws Exception {
         BaseJsonResult<Object> baseJsonResult = new BaseJsonResult<>();
         baseJsonResult.setData(null);
         return baseJsonResult;

@@ -38,11 +38,11 @@ public class DicController extends BaseController {
     public BaseJsonResult addDic(@RequestBody Dic dic) throws Exception {
         log.info("addDic.......");
         dicService.save(dic);
-        return successResult();
+        return successNullDataResult();
     }
 
     @RequestMapping(value = "/updateDic", method = RequestMethod.POST)
     public BaseJsonResult updateDic(Integer id) throws Exception {
-        return successResult();
+        return successNullDataResult();
     }
 }

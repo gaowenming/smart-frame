@@ -27,7 +27,7 @@ public class LogLevelController extends BaseController {
         log.info("info log...");
         log.warn("warn log...");
         log.error("error log...");
-        return successResult();
+        return successNullDataResult();
 
     }
 

@@ -29,7 +29,7 @@ public class TaskController extends BaseController {
         log.info("test async................");
         asyncTask.taskAsync1();
         asyncTask.taskAsync2();
-        return successResult();
+        return successNullDataResult();
 
     }
 
