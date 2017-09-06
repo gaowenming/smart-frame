@@ -12,7 +12,7 @@ import java.util.concurrent.Executor;
  */
 @Configuration
 @EnableAsync
-public class ExecutorConfig {
+public class ThreadExecutorConfig {
 
     /**
      * Set the ThreadPoolExecutor's core pool size.
@@ -33,7 +33,7 @@ public class ExecutorConfig {
         executor.setCorePoolSize(corePoolSize);
         executor.setMaxPoolSize(maxPoolSize);
         executor.setQueueCapacity(queueCapacity);
-        executor.setThreadNamePrefix("simpleExecutor-");
+        executor.setThreadNamePrefix("smartExecutor-");
         executor.initialize();
         return executor;
     }

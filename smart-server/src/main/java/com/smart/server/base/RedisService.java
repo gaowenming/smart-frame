@@ -1,4 +1,4 @@
-package com.smart.server.util;
+package com.smart.server.base;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

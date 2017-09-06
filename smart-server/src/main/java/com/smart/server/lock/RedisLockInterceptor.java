@@ -1,6 +1,6 @@
 package com.smart.server.lock;
 
-import com.smart.server.util.RedisService;
+import com.smart.server.base.RedisService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

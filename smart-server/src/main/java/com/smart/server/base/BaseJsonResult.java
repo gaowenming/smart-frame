@@ -1,4 +1,4 @@
-package com.smart.server.util;
+package com.smart.server.base;
 
 import java.io.Serializable;
 

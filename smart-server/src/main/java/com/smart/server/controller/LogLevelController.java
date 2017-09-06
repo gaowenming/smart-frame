@@ -1,6 +1,7 @@
 package com.smart.server.controller;
 
-import com.smart.server.util.BaseJsonResult;
+import com.smart.server.base.BaseController;
+import com.smart.server.base.BaseJsonResult;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,16 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("api/log/")
 @Slf4j
 @Api
-public class LogLevelController {
+public class LogLevelController extends BaseController {
 
     @RequestMapping(value = "/mylog", method = RequestMethod.GET)
-    public BaseJsonResult<String> task1() throws Exception {
-        BaseJsonResult<String> baseJsonResult = new BaseJsonResult<>();
+    public BaseJsonResult task1() throws Exception {
         log.debug("debug log...");
         log.info("info log...");
         log.warn("warn log...");
         log.error("error log...");
-        return baseJsonResult;
+        return successResult();
 
     }
 

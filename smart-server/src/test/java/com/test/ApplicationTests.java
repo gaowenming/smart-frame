@@ -4,7 +4,7 @@ import com.smart.server.Application;
 import com.smart.server.config.SmartConfigProperties;
 import com.smart.server.mail.SmartMailSender;
 import com.smart.server.task.AsyncTask;
-import com.smart.server.util.RedisService;
+import com.smart.server.base.RedisService;
 import com.smart.service.IDicService;
 
 import org.junit.Test;
@@ -14,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Random;
-import java.util.UUID;
 import java.util.concurrent.Future;
 
 @RunWith(SpringRunner.class)

@@ -1,6 +1,6 @@
 package com.smart.server.handler;
 
-import com.smart.server.util.BaseJsonResult;
+import com.smart.server.base.BaseJsonResult;
 import com.smart.service.base.BusinessErrorMsg;
 import com.smart.service.base.BusinessException;
 
